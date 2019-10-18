@@ -1,0 +1,16 @@
+﻿@model IEnumerable<FinancialGains.Transaction>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>All Transactions</h1>
+
+<a asp-action="Create">Create New Transaction</a>
+<form asp-controller="Transactions" asp-action="Search" method="post" class="float-right">
+    <label>View Transactions By Month</label>
+    <input name="dateTime" type="month" />
+    <input type="submit" value="Search" class="btn btn-outline-primary" />
+</form>
+<br/>
+@await Html.PartialAsync("_TransactionPartial", @Model)

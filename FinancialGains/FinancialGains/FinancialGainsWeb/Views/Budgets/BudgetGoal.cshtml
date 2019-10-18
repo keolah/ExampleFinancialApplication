@@ -1,0 +1,56 @@
+﻿@model FinancialGains.OverallBudgetGoal
+
+@{
+    ViewData["Title"] = "Overall Budget Goal";
+}
+
+<h1>Monthly Budget Goal For @Model.DateTime.ToString("MMMM") @Model.DateTime.Year</h1>
+<form asp-action="BudgetGoal" class="float-right">
+    <label>View Budget Goals By Month</label>
+    <input name="dateTime" type="month" value="@ViewData["Year"]-@ViewData["Month"]" />
+    <input type="submit" value="Search" class="btn btn-outline-primary" />
+</form>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BudgetRealities[0].Budget.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BudgetRealities[0].Budget.Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BudgetRealities[0].AmountSpent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BudgetRealities[0].Budget.Categories)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.BudgetRealities) {
+        <tr class="@Html.Raw(item.BudgetMet ? "" : "table-danger")">
+            <td>
+                @Html.DisplayFor(modelItem => item.Budget.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Budget.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AmountSpent)
+            </td>
+            <td>
+                <p>
+                    @foreach (var category in item.Budget.Categories)
+                    {
+                        if (category.IsSelected)
+                        {
+                            @category.Name<br />
+                        }
+                    }
+                </p>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

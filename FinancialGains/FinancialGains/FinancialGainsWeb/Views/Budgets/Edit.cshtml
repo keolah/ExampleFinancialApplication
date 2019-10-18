@@ -1,0 +1,53 @@
+﻿@model FinancialGains.Budget
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Budget</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Amount" class="control-label"></label>
+                <input asp-for="Amount" class="form-control" />
+                <span asp-validation-for="Amount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Categories" class="control-label"></label>
+                <div class="offset-1">
+                    @{
+                        for (int i = 0; i < @Model.Categories.Count; i++)
+                        {
+                            <input asp-for="@Model.Categories[i].IsSelected" type="checkbox" checked="@Model.Categories[i].IsSelected" />
+                            <label asp-for="@Model.Categories[i].Name">@Model.Categories[i].Name</label>
+                            <input asp-for="@Model.Categories[i].Id" value="@Model.Categories[i].Id" type="hidden">
+                            <br />
+                        }
+                    }
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

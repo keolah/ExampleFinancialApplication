@@ -1,0 +1,7 @@
+- Configuration (removal of passwords)
+- Paging of Transaction history
+- Search functionality
+- Development of personal profiles
+- Trending data (spending habits) and graphing it
+- Unit testing
+- More memes
